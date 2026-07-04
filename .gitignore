@@ -1,0 +1,37 @@
+# ─── Node / Next.js (server) ──────────────────────────────────────────────
+**/node_modules/
+**/.next/
+**/out/
+*.tsbuildinfo
+next-env.d.ts
+
+# ─── Android / Gradle / Kotlin (sdk) ──────────────────────────────────────
+**/build/
+**/.gradle/
+**/local.properties
+*.iml
+.idea/
+.kotlin/
+.cxx/
+captures/
+*.apk
+*.aab
+
+# ─── Secrets & environment ────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+# Never commit signing material
+*.jks
+*.keystore
+*.p12
+*.pfx
+*.pem
+
+# ─── Local tooling config (not part of the project) ───────────────────────
+.claude/
+
+# ─── OS / editor cruft ────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.log

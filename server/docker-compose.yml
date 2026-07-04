@@ -1,0 +1,15 @@
+services:
+  db:
+    image: timescale/timescaledb:latest-pg16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: gamemetrics
+      POSTGRES_PASSWORD: gamemetrics
+      POSTGRES_DB: gamemetrics
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/home/postgres/pgdata/data
+
+volumes:
+  pgdata:
