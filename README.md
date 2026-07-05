@@ -85,43 +85,47 @@ Three tiers, one direction of data flow:
 
 Prerequisites: **Docker** (for TimescaleDB) and **Node.js 20+**.
 
+> ⚠️ **Do step 1 first.** `BETTER_AUTH_SECRET` is REQUIRED — both the server and
+> `npm run seed:auth` **fail fast** without it. Set it before any `npm run`
+> command below.
+
 ```bash
 cd server
 
-# Start TimescaleDB (PostgreSQL 16) on :5432
+# 1. Configure environment FIRST. Copy the template, then generate a secret and
+#    paste it into .env as BETTER_AUTH_SECRET=...
+cp .env.example .env
+node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"
+
+# 2. Start TimescaleDB (PostgreSQL 16) on :5432
 docker compose up -d
 
-# Install dependencies
+# 3. Install dependencies
 npm install
 
-# Configure environment. BETTER_AUTH_SECRET is REQUIRED — the server refuses to
-# start without it. Copy the template and set a secret:
-cp .env.example .env
-export BETTER_AUTH_SECRET=$(openssl rand -base64 32)   # also paste it into .env
-
-# Create tables + hypertable + continuous aggregate
+# 4. Create tables + hypertable + continuous aggregate
 npm run migrate
 
-# Start the dev server → http://localhost:3000
+# 5. Load sample data (order matters: project → events → demo owner)
+npm run seed && npm run seed:events && npm run seed:auth
+
+# 6. Start the dev server → http://localhost:3000
 npm run dev
 ```
 
-Then open **http://localhost:3000**, sign up at `/signup`, and **create a
-project** in the portal — that generates the API key you'll give the SDK.
+7. Open **http://localhost:3000/login** and sign in with the demo credentials:
+   **demo@gamemetrics.dev** / **demo-password-123** — it lands on a project
+   pre-populated with a week of sample events. (Or sign up at `/signup` and
+   create your own project to get an API key for the SDK.)
 
-Optional sample data:
+The seed scripts run in that order for a reason: `seed` creates the project,
+`seed:events` fills it with a week of events, and `seed:auth` creates the demo
+login and assigns it that populated project, so the dashboard has data on first
+login.
 
-```bash
-npm run seed         # creates a "Test Game" project and prints an API key (for curl testing)
-npm run seed:events  # generates a week of sample events for the first project
-npm run seed:auth    # creates a demo login (demo@gamemetrics.dev / demo-password-123)
-                     # and, if it owns no projects yet, a demo project + API key
-```
-
-> **Note:** `npm run seed:auth` loads the auth module, so it needs
-> `BETTER_AUTH_SECRET` set in the environment (the `export` above covers it). It
-> creates the demo user and ensures that user owns a "Sample Project" with an API
-> key, so the demo login always lands on usable data.
+> **Troubleshooting:** if `docker compose up -d` reports port **5432** is already
+> allocated, an old container is holding it — run `docker ps`, then
+> `docker stop <name> && docker rm <name>` and retry.
 
 Smoke-test ingestion directly (use a key from the portal or `npm run seed`):
 

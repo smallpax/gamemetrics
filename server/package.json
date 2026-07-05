@@ -6,11 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "migrate": "tsx scripts/migrate.ts",
-    "seed": "tsx scripts/seed.ts",
-    "seed:auth": "tsx scripts/seed-auth.ts",
-    "seed:events": "tsx scripts/seed-events.ts",
-    "clean:demo": "tsx scripts/clean-demo.ts"
+    "migrate": "tsx --env-file-if-exists=.env scripts/migrate.ts",
+    "seed": "tsx --env-file-if-exists=.env scripts/seed.ts",
+    "seed:auth": "tsx --env-file-if-exists=.env scripts/seed-auth.ts",
+    "seed:events": "tsx --env-file-if-exists=.env scripts/seed-events.ts",
+    "clean:demo": "tsx --env-file-if-exists=.env scripts/clean-demo.ts"
   },
   "dependencies": {
     "better-auth": "^1.6.23",

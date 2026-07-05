@@ -14,7 +14,6 @@ import { auth } from "../src/lib/auth";
 const DEMO_EMAIL = process.env.DEMO_EMAIL ?? "demo@gamemetrics.dev";
 const DEMO_PASSWORD = process.env.DEMO_PASSWORD ?? "demo-password-123";
 const DEMO_NAME = "Demo User";
-const DEMO_PROJECTS = ["Sample Project", "Puzzle Quest"];
 
 async function seedAuth() {
   const pool = new Pool({
@@ -47,12 +46,18 @@ async function seedAuth() {
     console.log(`Demo user ${DEMO_EMAIL} already exists — reusing.`);
   }
 
-  // Claim any pre-existing demo projects for the demo user.
+  // Claim every pre-existing, still-unowned project for the demo user. On a
+  // fresh seed these are exactly the demo dataset created by `seed` /
+  // `seed:events` / `clean:demo` (e.g. the populated "Test Game" and the sparse
+  // "Puzzle Quest"), so the demo login lands on projects that already have
+  // events — rather than an empty project created here. Matching on
+  // `owner_id IS NULL` instead of hard-coded names keeps this robust to what the
+  // upstream seeds happen to name their projects.
   const assigned = await pool.query(
     `UPDATE projects SET owner_id = $1
-     WHERE name = ANY($2::text[])
+     WHERE owner_id IS NULL
      RETURNING name`,
-    [userId, DEMO_PROJECTS],
+    [userId],
   );
   if ((assigned.rowCount ?? 0) > 0) {
     console.log(
