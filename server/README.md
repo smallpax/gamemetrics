@@ -16,6 +16,11 @@ docker compose up -d
 # Install dependencies
 npm install
 
+# Configure environment. BETTER_AUTH_SECRET is REQUIRED — the server (and any
+# script that loads the auth module, e.g. seed:auth) refuses to start without it.
+cp .env.example .env
+export BETTER_AUTH_SECRET=$(openssl rand -base64 32)   # also paste into .env
+
 # Run migration (creates tables + hypertable + continuous aggregate)
 npm run migrate
 
@@ -88,8 +93,9 @@ endpoints authenticate only via `x-api-key` and never use sessions.
 - The login endpoint is rate-limited per IP (default 5 / 60s) → **429** with
   `Retry-After`.
 
-Set `BETTER_AUTH_SECRET` (and `BETTER_AUTH_URL`) in any real deployment; a dev
-fallback secret is used otherwise.
+`BETTER_AUTH_SECRET` is **required** — there is no fallback, so a misconfigured
+deployment fails fast instead of running on a known default. Set it in the
+environment (see `.env.example`); optionally set `BETTER_AUTH_URL`.
 
 > Note: the ownership gate lives in each `/projects/[id]` route's
 > `generateMetadata` (which resolves before the streamed response is flushed) so

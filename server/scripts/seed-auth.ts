@@ -47,18 +47,41 @@ async function seedAuth() {
     console.log(`Demo user ${DEMO_EMAIL} already exists — reusing.`);
   }
 
-  // Assign the existing demo projects to the demo user.
+  // Claim any pre-existing demo projects for the demo user.
   const assigned = await pool.query(
     `UPDATE projects SET owner_id = $1
      WHERE name = ANY($2::text[])
      RETURNING name`,
     [userId, DEMO_PROJECTS],
   );
+  if ((assigned.rowCount ?? 0) > 0) {
+    console.log(
+      `Assigned ${assigned.rowCount} existing project(s) to demo user: ` +
+        assigned.rows.map((r) => r.name).join(", "),
+    );
+  }
 
-  console.log(
-    `Assigned ${assigned.rowCount} project(s) to demo user: ` +
-      assigned.rows.map((r) => r.name).join(", "),
+  // If the demo user still owns nothing (e.g. a fresh database where `seed`
+  // created a differently-named project, or wasn't run), create a demo project
+  // and API key so the demo login always has usable data.
+  const owned = await pool.query(
+    "SELECT count(*)::int AS n FROM projects WHERE owner_id = $1",
+    [userId],
   );
+  if (owned.rows[0].n === 0) {
+    const proj = await pool.query(
+      "INSERT INTO projects (name, owner_id) VALUES ($1, $2) RETURNING id",
+      ["Sample Project", userId],
+    );
+    const key = await pool.query(
+      "INSERT INTO api_keys (project_id) VALUES ($1) RETURNING key",
+      [proj.rows[0].id],
+    );
+    console.log(
+      `Created demo project "Sample Project" for the demo user.\n` +
+        `API Key  : ${key.rows[0].key}`,
+    );
+  }
 
   console.log("\n--- Demo portal credentials ---");
   console.log(`Email    : ${DEMO_EMAIL}`);
