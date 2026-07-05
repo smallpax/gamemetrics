@@ -106,10 +106,19 @@ internal class GameMetricsClient(
                         ),
                 )
 
-        /** Builds the persisted event, merging the auto-collected [deviceContext] under `context`. */
+        /**
+         * Builds the persisted event, merging the auto-collected [deviceContext] under `context`
+         * and any user properties set via [setUserProperty] under `user_properties`.
+         */
         private fun buildEntity(name: String, params: Map<String, Any>?): EventEntity {
                 val merged = if (params != null) JSONObject(params) else JSONObject()
                 merged.put("context", deviceContext.asJson())
+                // Snapshot user properties under the same lock setUserProperty writes with, so a
+                // concurrent set can't corrupt the read. Only attach when non-empty to avoid noise.
+                val propsSnapshot = synchronized(userProperties) { HashMap(userProperties) }
+                if (propsSnapshot.isNotEmpty()) {
+                        merged.put("user_properties", JSONObject(propsSnapshot as Map<*, *>))
+                }
                 return EventEntity(
                         eventName = name,
                         userId = userId,
