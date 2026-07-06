@@ -4,6 +4,8 @@
 into a game, and gameplay events flow to a self-hosted server that stores them
 in TimescaleDB and visualizes them in a web portal.
 
+📖 **[Documentation site](https://smallpax.github.io/gamemetrics/)** — browse the full docs online.
+
 ## Overview
 
 GameMetrics is a three-tier analytics system: an **Android (Kotlin) SDK** that
