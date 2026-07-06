@@ -1,3 +1,6 @@
+
+
+
 # GameMetrics
 
 📖 **[Live documentation site »](https://smallpax.github.io/gamemetrics/)**
@@ -21,6 +24,10 @@ A short clip of the SDK in action — an event tracked on-device flows through t
 the live dashboard:
 
 <!-- VIDEO: drag the .mp4 here in the GitHub web editor; it embeds as a player -->
+
+https://github.com/user-attachments/assets/637171f3-7c93-4f4f-80ca-88fbd7ba40e2
+
+
 
 ## Architecture
 
