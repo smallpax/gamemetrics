@@ -1,10 +1,10 @@
 # GameMetrics
 
+📖 **[Live documentation site »](https://smallpax.github.io/gamemetrics/)**
+
 **A mobile-game analytics SDK, backend, and dashboard.** Drop the Android SDK
 into a game, and gameplay events flow to a self-hosted server that stores them
 in TimescaleDB and visualizes them in a web portal.
-
-📖 **[Documentation site](https://smallpax.github.io/gamemetrics/)** — browse the full docs online.
 
 ## Overview
 
