@@ -65,8 +65,8 @@ OLAP store would be more power than a single-tenant-per-key dashboard needs and
 another system to run; hand-rolled summary tables would reinvent, less correctly,
 what continuous aggregates already do.
 
-See [architecture.md §3](./architecture.md#3-storage-strategy--and-why) for the
-mechanics and [§4](./architecture.md#4-retrieval-strategy--and-why) for the
+See [architecture.md §3](./architecture.md#3-storage-strategy-and-why) for the
+mechanics and [§4](./architecture.md#4-retrieval-strategy-and-why) for the
 aggregate-vs-raw read decision.
 
 ---

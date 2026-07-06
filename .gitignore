@@ -35,3 +35,6 @@ captures/
 .DS_Store
 Thumbs.db
 *.log
+
+# ─── Generated docs site (regenerate with: mkdocs build) ──────────────────
+/site/

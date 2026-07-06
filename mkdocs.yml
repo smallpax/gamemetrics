@@ -1,0 +1,55 @@
+site_name: GameMetrics Documentation
+docs_dir: docs
+site_dir: site
+
+# Open the built site directly from the filesystem (file://) — directory-style
+# URLs break when there's no web server, so emit real .html files.
+use_directory_urls: false
+
+theme:
+  name: material
+  palette:
+    scheme: slate
+    primary: indigo
+    accent: indigo
+  features:
+    # NOTE: navigation.instant is intentionally NOT enabled. Instant loading
+    # fetches pages via XHR, which the browser blocks under file:// (opaque
+    # origin) — it breaks navigation and the Mermaid typeset pass when the site
+    # is opened directly from disk.
+    - navigation.tracking
+    - navigation.top
+    - content.code.copy
+    - toc.follow
+
+# Vendor Mermaid locally so it works offline from file://. Material's own
+# integration only loads mermaid.js from the unpkg CDN; by defining
+# window.mermaid up front, Material detects it's already loaded and skips the
+# network fetch, then initializes/renders the ```mermaid blocks itself.
+extra_javascript:
+  - assets/javascripts/mermaid.min.js
+
+nav:
+  - Home: index.md
+  - Architecture: architecture.md
+  - SDK Reference: sdk.md
+  - API Reference: api-reference.md
+  - Design Decisions: design-decisions.md
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - toc:
+      permalink: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format

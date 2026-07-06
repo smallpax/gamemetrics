@@ -195,6 +195,31 @@ Deeper docs live in [`/docs`](./docs) *(being written)*:
 - [`api-reference.md`](./docs/api-reference.md) — REST API: ingestion (`/v1/events`, `/v1/events/batch`) and metrics (`/v1/metrics/*`)
 - [`design-decisions.md`](./docs/design-decisions.md) — why batched ingestion, TimescaleDB, data-layer authz, and other tradeoffs
 
+### Documentation site
+
+The `/docs` Markdown is also published as a searchable, dark-themed static site
+built with [MkDocs](https://www.mkdocs.org/) + the
+[Material](https://squidfunk.github.io/mkdocs-material/) theme, with Mermaid
+diagrams rendered inline.
+
+Install the one dependency (Python 3):
+
+```bash
+pip install mkdocs-material
+```
+
+Then, from the repo root:
+
+```bash
+mkdocs serve   # live-reloading local preview at http://127.0.0.1:8000
+mkdocs build   # generate the static site into ./site
+```
+
+`mkdocs build` writes a self-contained `site/` folder. Open `site/index.html`
+directly in a browser — `use_directory_urls: false` keeps links working over
+`file://`. (Rendering the Mermaid diagrams fetches `mermaid.js` from a CDN, so
+that page needs internet access the first time.)
+
 ## License
 
 [MIT](./LICENSE)
