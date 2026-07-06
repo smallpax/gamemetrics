@@ -1,0 +1,1353 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="index.html">
+      
+      
+        <link rel="next" href="sdk.html">
+      
+      
+        
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Architecture - GameMetrics Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#gamemetrics-architecture" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="GameMetrics Documentation" class="md-header__button md-logo" aria-label="GameMetrics Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            GameMetrics Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Architecture
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="GameMetrics Documentation" class="md-nav__button md-logo" aria-label="GameMetrics Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    GameMetrics Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="architecture.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-system-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. System overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-data-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Data model
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Data model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ingestion-analytics-tables-001_initsql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ingestion / analytics tables (001_init.sql)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#portal-auth-tables-003_authsql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Portal auth tables (003_auth.sql)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relationships-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Relationships (summary)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-storage-strategy-and-why" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Storage strategy — and why
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Storage strategy — and why">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-a-timescaledb-hypertable-for-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why a TimescaleDB hypertable for events
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-the-event_counts_hourly-continuous-aggregate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why the event_counts_hourly continuous aggregate
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-retrieval-strategy-and-why" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Retrieval strategy — and why
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-ingestion-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Ingestion path
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Ingestion path">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single-round-trip-unnest-insert" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Single-round-trip unnest insert
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#whole-batch-atomic-semantics-and-why" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Whole-batch-atomic semantics — and why
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-ingestion-input-hardening" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Ingestion input hardening
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-portal-as-api-client-single-source-of-truth" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Portal-as-API-client — single source of truth
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-two-separate-auth-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Two separate auth systems
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Security
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-things-to-verify-before-relying-on-this-doc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Things to verify before relying on this doc
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="sdk.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SDK Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api-reference.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="design-decisions.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Decisions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-system-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. System overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-data-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Data model
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Data model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ingestion-analytics-tables-001_initsql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ingestion / analytics tables (001_init.sql)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#portal-auth-tables-003_authsql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Portal auth tables (003_auth.sql)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relationships-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Relationships (summary)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-storage-strategy-and-why" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Storage strategy — and why
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Storage strategy — and why">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-a-timescaledb-hypertable-for-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why a TimescaleDB hypertable for events
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-the-event_counts_hourly-continuous-aggregate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why the event_counts_hourly continuous aggregate
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-retrieval-strategy-and-why" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Retrieval strategy — and why
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-ingestion-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Ingestion path
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Ingestion path">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single-round-trip-unnest-insert" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Single-round-trip unnest insert
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#whole-batch-atomic-semantics-and-why" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Whole-batch-atomic semantics — and why
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-ingestion-input-hardening" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Ingestion input hardening
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-portal-as-api-client-single-source-of-truth" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Portal-as-API-client — single source of truth
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-two-separate-auth-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Two separate auth systems
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Security
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-things-to-verify-before-relying-on-this-doc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Things to verify before relying on this doc
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="gamemetrics-architecture">GameMetrics — Architecture<a class="headerlink" href="#gamemetrics-architecture" title="Permanent link">&para;</a></h1>
+<p>This document explains how GameMetrics is put together and, where the design
+made a non-obvious choice, <em>why</em>. It is written against the code in <code>/sdk</code> and
+<code>/server</code>; file paths are cited so claims can be checked.</p>
+<hr />
+<h2 id="1-system-overview">1. System overview<a class="headerlink" href="#1-system-overview" title="Permanent link">&para;</a></h2>
+<p>GameMetrics is a three-tier analytics system with a single direction of data
+flow: events are produced on-device, ingested and stored server-side, and read
+back by a dashboard.</p>
+<ol>
+<li><strong>SDK (<code>/sdk</code>)</strong> — an Android (Kotlin) library. The game calls
+   <code>GameMetrics.trackEvent(...)</code>; events are written to a local Room/SQLite
+   buffer and uploaded in batches by a background WorkManager job. Tracking never
+   blocks the game thread and survives offline periods and process death.</li>
+<li><strong>Server + database (<code>/server</code>)</strong> — a Next.js (App Router) backend. It exposes
+   an ingestion REST API (<code>/v1/events</code>, <code>/v1/events/batch</code>) and a read/metrics
+   API (<code>/v1/metrics/*</code>, <code>/v1/events/recent</code>), all authenticated per-project by
+   an <code>x-api-key</code> header. Events are stored in <strong>TimescaleDB</strong> (PostgreSQL 16)
+   using a time-partitioned hypertable plus a continuous aggregate.</li>
+<li><strong>Portal (<code>/server</code>, same Next.js app)</strong> — a dashboard behind email/password
+   auth (Better Auth). It renders overview stats, time-series charts, top events,
+   and a real-time live-event view. For metric data it calls the same <code>/v1</code> REST
+   API server-side rather than owning a second query path (see §7).</li>
+</ol>
+<p>End-to-end flow:</p>
+<pre class="mermaid"><code>flowchart TD
+  subgraph SDK["SDK — /sdk (Android, Kotlin)"]
+    direction TB
+    game["Android game&lt;br/&gt;GameMetrics.trackEvent()"]
+    room[("Room&lt;br/&gt;local SQLite buffer")]
+    flush["FlushWorker&lt;br/&gt;(WorkManager, batched)"]
+    game --&gt; room --&gt; flush
+  end
+
+  subgraph SERVER["Server + DB — /server (Next.js + TimescaleDB)"]
+    direction TB
+    ingest["POST /v1/events/batch&lt;br/&gt;(x-api-key)"]
+    events[("events&lt;br/&gt;TimescaleDB hypertable")]
+    agg[("event_counts_hourly&lt;br/&gt;continuous aggregate")]
+    metrics["GET /v1/metrics/*"]
+    recent["GET /v1/events/recent"]
+    ingest --&gt; events
+    events --&gt; agg
+    agg --&gt; metrics
+    events --&gt; metrics
+    events --&gt; recent
+  end
+
+  subgraph PORTAL["Portal — /server (dashboard)"]
+    direction TB
+    dash["Portal dashboard&lt;br/&gt;(session cookie)"]
+  end
+
+  flush --&gt;|"HTTPS batch&lt;br/&gt;≤500 events/request"| ingest
+  metrics --&gt;|"server-side fetch&lt;br/&gt;(key resolved server-side)"| dash
+  recent --&gt;|"live view (polled)"| dash</code></pre>
+<hr />
+<h2 id="2-data-model">2. Data model<a class="headerlink" href="#2-data-model" title="Permanent link">&para;</a></h2>
+<p>The schema is defined across three migrations in <code>server/migrations/</code>
+(<code>001_init.sql</code>, <code>002_realtime_agg.sql</code>, <code>003_auth.sql</code>), applied in order by
+<code>scripts/migrate.ts</code>.</p>
+<h3 id="ingestion-analytics-tables-001_initsql">Ingestion / analytics tables (<code>001_init.sql</code>)<a class="headerlink" href="#ingestion-analytics-tables-001_initsql" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong><code>projects</code></strong> — <code>id UUID PK</code> (default <code>gen_random_uuid()</code>), <code>name TEXT</code>,
+  <code>created_at TIMESTAMPTZ</code>. <code>owner_id TEXT</code> is added later by <code>003_auth.sql</code>
+  (nullable, references <code>"user"(id)</code>) — this is what ties a project to a portal
+  user.</li>
+<li><strong><code>api_keys</code></strong> — <code>key TEXT PK</code> (default <code>encode(gen_random_bytes(24),'hex')</code>,
+  i.e. a 48-char hex string), <code>project_id UUID NOT NULL REFERENCES projects(id)
+  ON DELETE CASCADE</code>, <code>created_at</code>. A project may have more than one key; reads
+  resolve "the" key as the oldest by <code>created_at</code> (<code>src/lib/portal.ts</code>).</li>
+<li><strong><code>events</code></strong> — the fact table, a <strong>TimescaleDB hypertable</strong> partitioned on
+  <code>timestamp</code> (<code>SELECT create_hypertable('events','timestamp')</code>). Columns:
+  <code>id UUID</code> (has a default but is <strong>not</strong> a declared primary key — see the note
+  below), <code>project_id UUID NOT NULL REFERENCES projects(id)</code>, <code>event_name TEXT</code>,
+  <code>user_id TEXT</code> (nullable), <code>session_id TEXT</code> (nullable), <code>params JSONB</code>,
+  <code>timestamp TIMESTAMPTZ</code>. Secondary indexes: <code>(project_id, timestamp DESC)</code> and
+  <code>(event_name, timestamp DESC)</code>.</li>
+<li><strong><code>event_counts_hourly</code></strong> — a continuous aggregate (materialized view) over
+  <code>events</code>: <code>count(*)</code> grouped by <code>project_id</code> and <code>time_bucket('1 hour',
+  timestamp)</code>. See §3.</li>
+</ul>
+<blockquote>
+<p>Note: <code>events.id</code> carries a <code>gen_random_uuid()</code> default but no <code>PRIMARY KEY</code>
+constraint. On a hypertable any unique constraint must include the
+partitioning column (<code>timestamp</code>), so there is no standalone PK on <code>id</code>; the
+column exists mainly to give each row a stable identifier (used by the live
+view's dedupe). Verified in <code>001_init.sql</code>.</p>
+</blockquote>
+<h3 id="portal-auth-tables-003_authsql">Portal auth tables (<code>003_auth.sql</code>)<a class="headerlink" href="#portal-auth-tables-003_authsql" title="Permanent link">&para;</a></h3>
+<p>Generated by Better Auth's CLI for the email/password configuration:
+<strong><code>"user"</code></strong>, <strong><code>"session"</code></strong>, <strong><code>"account"</code></strong>, <strong><code>"verification"</code></strong>.
+<code>session.userId</code> and <code>account.userId</code> both reference <code>"user"(id)</code> with
+<code>ON DELETE CASCADE</code>. Hashed passwords live in <code>account.password</code> (Better Auth
+writes them; see §8). These tables are entirely separate from the ingestion
+tables — the only link between the two worlds is <code>projects.owner_id → "user".id</code>.</p>
+<h3 id="relationships-summary">Relationships (summary)<a class="headerlink" href="#relationships-summary" title="Permanent link">&para;</a></h3>
+<pre class="mermaid"><code>erDiagram
+  user               ||--o{ session             : "has"
+  user               ||--o{ account             : "has (password hash)"
+  user               |o--o{ projects            : "owns (owner_id, nullable)"
+  projects           ||--o{ api_keys            : "has"
+  projects           ||--o{ events              : "receives"
+  events             }o--|| event_counts_hourly : "rolled up per (project, hour)"
+
+  user {
+    text id PK
+    text email
+    text name
+    boolean emailVerified
+  }
+  session {
+    text id PK
+    text userId FK
+    text token
+    timestamptz expiresAt
+  }
+  account {
+    text id PK
+    text userId FK
+    text password "hashed by Better Auth"
+    text providerId
+  }
+  verification {
+    text id PK
+    text identifier
+    text value
+    timestamptz expiresAt
+  }
+  projects {
+    uuid id PK
+    text name
+    text owner_id FK "nullable"
+    timestamptz created_at
+  }
+  api_keys {
+    text key PK
+    uuid project_id FK
+    timestamptz created_at
+  }
+  events {
+    uuid id "default only, not a PK (hypertable)"
+    uuid project_id FK
+    text event_name
+    text user_id "game player id, not a FK"
+    text session_id "game session id, not a FK"
+    jsonb params
+    timestamptz timestamp "partition key"
+  }
+  event_counts_hourly {
+    uuid project_id
+    timestamptz bucket
+    bigint event_count
+  }</code></pre>
+<p><code>verification</code> is a standalone Better Auth table (no FK to the others). Note that
+<code>events.user_id</code> / <code>events.session_id</code> are <strong>game-side</strong> identifiers carried in
+the payload — they are plain text, not foreign keys to the portal <code>user</code> /
+<code>session</code> tables.</p>
+<hr />
+<h2 id="3-storage-strategy-and-why">3. Storage strategy — and why<a class="headerlink" href="#3-storage-strategy-and-why" title="Permanent link">&para;</a></h2>
+<h3 id="why-a-timescaledb-hypertable-for-events">Why a TimescaleDB hypertable for <code>events</code><a class="headerlink" href="#why-a-timescaledb-hypertable-for-events" title="Permanent link">&para;</a></h3>
+<p>The event stream is an <strong>append-heavy, time-ordered, analytical</strong> workload:
+writes are almost exclusively inserts of "now-ish" rows, and reads are almost
+always "counts/aggregations over a time window for one project." A hypertable is
+a good fit for this shape:</p>
+<ul>
+<li><strong>Time partitioning (chunks).</strong> <code>create_hypertable('events','timestamp')</code>
+  transparently splits the table into per-time-range chunks. Range-scoped reads
+  (every metrics query filters <code>timestamp &gt;= from AND timestamp &lt;= to</code>) touch
+  only the chunks overlapping the window instead of the whole table — chunk
+  exclusion keeps query cost proportional to the range, not to total history.</li>
+<li><strong>Insert locality.</strong> New events land in the most recent chunk, so the hot write
+  path stays in a small, cache-friendly working set even as history grows.</li>
+<li><strong>Standard SQL / <code>pg</code>.</strong> It's still PostgreSQL: the app talks to it with plain
+  parameterized <code>pg</code> queries (no ORM), and TimescaleDB adds the time-series
+  primitives (<code>time_bucket</code>, continuous aggregates) the metrics endpoints rely
+  on.</li>
+</ul>
+<p>The two secondary indexes — <code>(project_id, timestamp DESC)</code> and
+<code>(event_name, timestamp DESC)</code> — match the two access patterns the raw table is
+actually queried by: project-scoped time ranges, and event-name filters.</p>
+<h3 id="why-the-event_counts_hourly-continuous-aggregate">Why the <code>event_counts_hourly</code> continuous aggregate<a class="headerlink" href="#why-the-event_counts_hourly-continuous-aggregate" title="Permanent link">&para;</a></h3>
+<p>The dashboard's most frequent read is "how many events per bucket over this
+range" for charts and totals. Answering that from raw <code>events</code> means scanning and
+counting every row in the window on every request — fine for a demo, wasteful at
+volume, and repeated work since the answer for any already-elapsed hour never
+changes.</p>
+<p><code>event_counts_hourly</code> <strong>pre-rolls</strong> the per-<code>(project, hour)</code> counts once and
+stores them, so a chart read scans a handful of hourly rows instead of thousands
+of raw events. Concretely: a 7-day chart reads at most ~168 aggregate rows per
+project rather than every event in those 7 days. Daily buckets are produced by
+rolling the hourly rows up with <code>time_bucket('1 day', bucket)</code> — still reading
+the small aggregate, not raw.</p>
+<p><strong>Freshness.</strong> A plain continuous aggregate only reflects data up to its last
+scheduled materialization, so a query could silently miss up to the last hour+ of
+events — unacceptable for a near-live dashboard. <code>002_realtime_agg.sql</code> sets
+<code>timescaledb.materialized_only = false</code>, enabling <strong>real-time aggregation</strong>: the
+view transparently <code>UNION</code>s the materialized buckets with an on-the-fly
+aggregation of the raw tail. The read path gets both the speed of pre-rolled data
+and up-to-the-second freshness, with no recency gap. (The refresh policy in
+<code>001_init.sql</code> materializes on a 1-hour schedule with a 1-hour <code>end_offset</code>.)</p>
+<hr />
+<h2 id="4-retrieval-strategy-and-why">4. Retrieval strategy — and why<a class="headerlink" href="#4-retrieval-strategy-and-why" title="Permanent link">&para;</a></h2>
+<p>The key decision: <strong>not every read can or should use the aggregate.</strong> The
+aggregate only stores <code>count(*)</code> per <code>(project_id, hour)</code> — it has <strong>no
+<code>event_name</code>, <code>user_id</code>, or <code>session_id</code> dimension</strong>, and its time granularity is
+one hour. So each endpoint picks its source deliberately, trading exactness and
+dimensionality against scan cost.</p>
+<table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>Source</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET /v1/metrics/timeseries</code> (no <code>event_name</code>)</td>
+<td><code>event_counts_hourly</code></td>
+<td>Pure bucketed counts — exactly what the aggregate stores. Fast path; hourly buckets read directly, daily buckets rolled up from hourly.</td>
+</tr>
+<tr>
+<td><code>GET /v1/metrics/timeseries</code> (<code>event_name=…</code>)</td>
+<td>raw <code>events</code></td>
+<td>The aggregate has no per-event-name dimension, so slicing by event name must scan raw.</td>
+</tr>
+<tr>
+<td><code>GET /v1/metrics/overview</code></td>
+<td>raw <code>events</code></td>
+<td>Needs distinct users (DAU + total) and distinct sessions, which the count-only aggregate can't answer. <code>total_events</code> is computed from the <strong>same</strong> raw scan so all four figures are mutually consistent for an arbitrary (even sub-hour) window.</td>
+</tr>
+<tr>
+<td><code>GET /v1/metrics/events</code> (top events)</td>
+<td>raw <code>events</code></td>
+<td>A per-<code>event_name</code> breakdown — a dimension the aggregate doesn't carry.</td>
+</tr>
+<tr>
+<td><code>GET /v1/events/recent</code> (live view)</td>
+<td>raw <code>events</code></td>
+<td>Needs full per-row detail (id, ids, params) and sub-second ordering; an hourly count can't provide it.</td>
+</tr>
+</tbody>
+</table>
+<p>The tradeoff in one line: <strong>use the aggregate when the question is "how many,
+bucketed by time, for the whole project" (cheap, and the aggregate is exact for
+that question); drop to raw <code>events</code> whenever the answer needs a dimension the
+aggregate doesn't store (event name, distinct users/sessions) or finer-than-hour
+precision.</strong> <code>timeseries</code> reports which path it took in a <code>source:
+"aggregate" | "events"</code> field on the response, so the choice is observable.</p>
+<p>Every metrics query is scoped to a single <code>project_id</code> (resolved from the API
+key) and bounded by a time range (<code>parseTimeRange</code>, default last 7 days, in
+<code>src/lib/api.ts</code>), so even the raw-scan endpoints stay bounded by the
+<code>(project_id, timestamp)</code> index and chunk exclusion.</p>
+<blockquote>
+<p>Note on wording: the aggregate path is often described as the "fast" path and
+raw as the "exact" path. With real-time aggregation enabled (§3) the aggregate
+is also <em>exact for a pure count</em> — the reason the other endpoints avoid it is
+missing <strong>dimensions/precision</strong>, not accuracy of the count itself.</p>
+</blockquote>
+<hr />
+<h2 id="5-ingestion-path">5. Ingestion path<a class="headerlink" href="#5-ingestion-path" title="Permanent link">&para;</a></h2>
+<p>Two endpoints, one shared validator (<code>src/lib/events.ts</code> — <code>normalizeEvent</code>,
+<code>readJsonBody</code>), so single and batch accept an identical event shape and enforce
+identical limits (event-name ≤128 chars, ids ≤256, params ≤8 KB serialized).</p>
+<ul>
+<li><strong><code>POST /v1/events</code></strong> (<code>src/app/v1/events/route.ts</code>) — a single event, one
+  parameterized <code>INSERT</code>. Body cap 32 KB. Returns <code>201 { ok: true }</code>. Kept for
+  simple/manual use (e.g. <code>curl</code>).</li>
+<li><strong><code>POST /v1/events/batch</code></strong> (<code>src/app/v1/events/batch/route.ts</code>) — up to
+  <strong>500</strong> events (<code>MAX_BATCH_EVENTS</code>) in one request, body cap 2 MB. This is the
+  path the SDK uses.</li>
+</ul>
+<h3 id="single-round-trip-unnest-insert">Single-round-trip <code>unnest</code> insert<a class="headerlink" href="#single-round-trip-unnest-insert" title="Permanent link">&para;</a></h3>
+<p>The batch endpoint does <strong>not</strong> loop <code>INSERT</code>s. It passes the batch as six
+parameters — <code>project_id</code> as a scalar plus five parallel arrays
+(<code>event_name[]</code>, <code>user_id[]</code>, <code>session_id[]</code>, <code>params[]</code>, <code>timestamp[]</code>) — and
+expands them server-side with <code>unnest</code>, casting each <code>params</code> text element to
+<code>jsonb</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">events</span><span class="w"> </span><span class="p">(</span><span class="n">project_id</span><span class="p">,</span><span class="w"> </span><span class="n">event_name</span><span class="p">,</span><span class="w"> </span><span class="n">user_id</span><span class="p">,</span><span class="w"> </span><span class="n">session_id</span><span class="p">,</span><span class="w"> </span><span class="n">params</span><span class="p">,</span><span class="w"> </span><span class="k">timestamp</span><span class="p">)</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">SELECT</span><span class="w"> </span><span class="err">$</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">event_name</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">user_id</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">session_id</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">params</span><span class="p">::</span><span class="n">jsonb</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="k">timestamp</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">FROM</span><span class="w"> </span><span class="k">unnest</span><span class="p">(</span><span class="err">$</span><span class="mi">2</span><span class="p">::</span><span class="nb">text</span><span class="p">[],</span><span class="w"> </span><span class="err">$</span><span class="mi">3</span><span class="p">::</span><span class="nb">text</span><span class="p">[],</span><span class="w"> </span><span class="err">$</span><span class="mi">4</span><span class="p">::</span><span class="nb">text</span><span class="p">[],</span><span class="w"> </span><span class="err">$</span><span class="mi">5</span><span class="p">::</span><span class="nb">text</span><span class="p">[],</span><span class="w"> </span><span class="err">$</span><span class="mi">6</span><span class="p">::</span><span class="n">timestamptz</span><span class="p">[])</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="k">AS</span><span class="w"> </span><span class="n">e</span><span class="p">(</span><span class="n">event_name</span><span class="p">,</span><span class="w"> </span><span class="n">user_id</span><span class="p">,</span><span class="w"> </span><span class="n">session_id</span><span class="p">,</span><span class="w"> </span><span class="n">params</span><span class="p">,</span><span class="w"> </span><span class="k">timestamp</span><span class="p">)</span>
+</code></pre></div>
+<p>One statement, one network round-trip, one plan — instead of N round-trips for N
+events. Parameters are bound (never string-interpolated), so there is no
+injection surface even though the row count varies.</p>
+<h3 id="whole-batch-atomic-semantics-and-why">Whole-batch-atomic semantics — and why<a class="headerlink" href="#whole-batch-atomic-semantics-and-why" title="Permanent link">&para;</a></h3>
+<p>Validation is <strong>whole-batch-atomic</strong>: every event is normalized first; if <em>any</em>
+one is malformed, the endpoint returns <code>400</code> (with the offending index) and
+writes <strong>nothing</strong>. A <code>201</code> therefore means <em>every</em> event in the batch was
+stored. The reason is the client contract: the SDK deletes its local rows only on
+success, so an all-or-nothing result lets it safely drop exactly the batch it
+sent without reconciling a partial "some stored, some skipped" outcome. (Because
+it's a single <code>INSERT</code> statement, the write is also atomic at the DB level.)</p>
+<p>The SDK cooperates with this contract (<code>FlushWorker</code>, <code>GameMetricsClient</code>):</p>
+<ul>
+<li>It drains its local queue one <code>≤500</code>-event batch per request
+  (<code>MAX_BATCH_SIZE = 500</code>, matching the server cap) via <code>EventDao.getOldest</code>.</li>
+<li><strong><code>2xx</code> (Delivered):</strong> delete those local rows.</li>
+<li><strong><code>400</code>/<code>413</code> (Rejected):</strong> a client bug that will never succeed as-is — log
+  loudly and drop the rows so they can't wedge the queue forever.</li>
+<li><strong><code>429</code> (Retry):</strong> honor <code>Retry-After</code> and reschedule the flush.</li>
+<li><strong><code>5xx</code>/network (Retry):</strong> transient — keep the rows and retry later
+  (WorkManager backoff).</li>
+</ul>
+<p>A crash path (<code>flushBlockingOnCrash</code>) reuses the same batched sink under a hard
+3-second wall-clock budget so a dying process flushes what it can without
+hanging.</p>
+<pre class="mermaid"><code>flowchart TD
+  track["GameMetrics.trackEvent()&lt;br/&gt;(+ device context)"] --&gt; room[("Room buffer&lt;br/&gt;local SQLite")]
+
+  triggers["Flush triggered by:&lt;br/&gt;periodic 15 min · app backgrounded (onStop) · flush()"] --&gt; worker
+  room -.-&gt; worker["FlushWorker: drain ≤500-event batch (getOldest)&lt;br/&gt;→ HttpSink POST /v1/events/batch"]
+  worker --&gt; resp{"HTTP response"}
+
+  resp --&gt;|"2xx delivered"| del["delete batch from Room"] --&gt; loop{"rows left?"}
+  resp --&gt;|"400 / 413 rejected"| drop["log + delete batch&lt;br/&gt;(drop poison rows)"] --&gt; loop
+  resp --&gt;|"429"| after["reschedule flush&lt;br/&gt;(honor Retry-After)"]
+  resp --&gt;|"5xx / network"| keep["keep rows&lt;br/&gt;Result.retry() → WorkManager backoff"]
+  loop --&gt;|yes| worker
+  loop --&gt;|no| ok["done (Result.success)"]
+
+  subgraph CRASH["Crash path — flushBlockingOnCrash (3s hard budget)"]
+    direction TB
+    exc["uncaught exception&lt;br/&gt;(CrashHandler)"] --&gt; cpersist["persist buffered + crash event to Room"]
+    cpersist --&gt; csend["drain batches via crash sink&lt;br/&gt;(short HTTP timeouts)"]
+    csend --&gt; cbudget{"delivered within budget?"}
+    cbudget --&gt;|yes| cdel["delete sent rows"]
+    cbudget --&gt;|"no / retry"| cleave["abandon — rows flushed next launch"]
+  end</code></pre>
+<hr />
+<h2 id="6-ingestion-input-hardening">6. Ingestion input hardening<a class="headerlink" href="#6-ingestion-input-hardening" title="Permanent link">&para;</a></h2>
+<p>Because ingestion is public (anyone with a key can POST), the endpoints defend
+before touching the DB: <code>Content-Length</code> is checked, then the actual body bytes,
+against per-endpoint caps (413 on exceed); malformed JSON is 400; batch size is
+capped at 500 (413). Rate limiting runs <em>before</em> auth so an invalid-key flood is
+throttled too (§8).</p>
+<hr />
+<h2 id="7-portal-as-api-client-single-source-of-truth">7. Portal-as-API-client — single source of truth<a class="headerlink" href="#7-portal-as-api-client-single-source-of-truth" title="Permanent link">&para;</a></h2>
+<p>The portal does <strong>not</strong> keep a second, parallel query layer for metrics. For
+overview/top-events/timeseries/live data it calls the very same <code>/v1</code> HTTP API an
+external integrator would (<code>src/lib/portal.ts</code> — <code>metricsFetch</code>,
+<code>fetchRecentEvents</code>). The only thing it does differently: it resolves the
+project's <code>x-api-key</code> <strong>server-side</strong> and attaches it to the request, so the key
+never reaches client JavaScript.</p>
+<p>Why: one implementation of every metric means one place for the query logic, the
+validation, and the aggregate-vs-raw decision — the portal can't drift from what
+the public API returns. The accepted tradeoff is an extra in-process HTTP hop
+(loopback <code>fetch</code> with <code>cache: "no-store"</code>) versus calling the DB directly.</p>
+<p>The live view adds a thin portal-internal proxy
+(<code>/projects/:id/live/recent</code>) that the client polls; it does its own session +
+ownership check and forwards to <code>/v1/events/recent</code>. That route is a deliberate
+"transport seam" — polling could later be swapped for SSE without changing the
+client's data shape.</p>
+<blockquote>
+<p>One exception, by design: <strong>project listing and ownership checks read the DB
+directly</strong> (<code>listProjects</code>, <code>getOwnedProject</code>), because those aren't metrics
+endpoints — they're the authorization layer that decides <em>which</em> project's key
+the portal is even allowed to use.</p>
+</blockquote>
+<hr />
+<h2 id="8-two-separate-auth-systems">8. Two separate auth systems<a class="headerlink" href="#8-two-separate-auth-systems" title="Permanent link">&para;</a></h2>
+<p>GameMetrics runs two independent authentication systems because it has two
+different callers with two different threat models:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Ingestion / metrics API</th>
+<th>Portal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Caller</td>
+<td>Machines (game SDKs, integrators)</td>
+<td>Humans (dashboard)</td>
+</tr>
+<tr>
+<td>Credential</td>
+<td><code>x-api-key</code> header → resolves <code>project_id</code> (<code>src/lib/api.ts</code>)</td>
+<td>Email/password → Better Auth session cookie</td>
+</tr>
+<tr>
+<td>Scope</td>
+<td>One project (the key's project)</td>
+<td>One user and the projects they own</td>
+</tr>
+<tr>
+<td>Routes</td>
+<td><code>/v1/*</code></td>
+<td><code>/</code>, <code>/projects/*</code>, <code>/api/auth/*</code></td>
+</tr>
+</tbody>
+</table>
+<p>Keeping them separate means the machine path never depends on human session
+handling and vice versa: an API key is a long-lived per-project bearer secret
+suitable for embedding in a game build, while a portal session is a short-lived,
+revocable, DB-backed cookie for an interactive human. Neither can be used in the
+other's place. The ingestion middleware matcher is deliberately narrow and
+<strong>never</strong> touches <code>/v1/*</code> or <code>/api/auth/*</code>, so x-api-key ingestion is entirely
+unaffected by portal auth (<code>src/middleware.ts</code>).</p>
+<p><strong>Password hashing</strong> is owned by Better Auth (<code>src/lib/auth.ts</code>): the app never
+writes <code>user</code>/<code>account</code> rows by hand (even the demo seed goes through
+<code>auth.api.signUpEmail</code>), and only the library-produced hash is stored in
+<code>account.password</code>. Sessions are <strong>database-backed</strong> (the <code>session</code> table), not
+JWT-only, so they are revocable — a 7-day expiry refreshed daily.</p>
+<blockquote>
+<p>Flag: the exact password-hashing algorithm is Better Auth's built-in default
+(this project does not override it in <code>auth.ts</code>). If the precise algorithm/params
+matter for a security review, confirm against the installed Better Auth version
+rather than assuming.</p>
+</blockquote>
+<hr />
+<h2 id="9-security">9. Security<a class="headerlink" href="#9-security" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Authorization lives in the data layer, not (only) middleware.</strong> Per
+  <strong>CVE-2025-29927</strong>, Next.js middleware auth gates can be bypassed, so
+  middleware here is treated as an <em>optimistic redirect only</em> — it bounces
+  cookie-less users to <code>/login</code> to save a render, and explicitly is "NOT the
+  authorization boundary" (<code>src/middleware.ts</code>). Real enforcement is in the
+  server components / route handlers / data layer: every protected page and
+  portal route calls <code>requireUser()</code> and <code>getOwnedProject()</code> directly
+  (<code>src/lib/portal.ts</code>). <code>getOwnedProject</code> returns a project <strong>only</strong> if the
+  logged-in user owns it, and callers surface both "missing" and "not yours" as
+  the same <code>404</code> so project existence isn't leaked across accounts.</li>
+<li><strong>Parameterized queries everywhere.</strong> All DB access uses bound <code>pg</code>
+  parameters; time ranges and ids are never interpolated into SQL. Project ids
+  are additionally shape-checked against a UUID regex before the query so a
+  malformed id can't even reach the cast.</li>
+<li><strong>Password hashing via Better Auth</strong> (§8) — no hand-rolled crypto; hashes only,
+  never plaintext.</li>
+<li><strong>Rate limiting</strong> (<code>src/lib/rate-limit.ts</code>) — an in-memory sliding-window
+  limiter. Ingestion is limited per <strong>API key</strong> and checked <em>before</em> auth/DB work
+  so invalid-key floods are throttled cheaply (100 req/min default). The login
+  endpoint (<code>/sign-in/email</code>) has a separate, stricter budget keyed per <strong>client
+  IP</strong> (5 req/min default) since Better Auth does not brute-force protect it
+  (<code>src/app/api/auth/[...all]/route.ts</code>).</li>
+<li><strong>Input hardening on ingestion</strong> — size caps, JSON validation, batch-size cap
+  (§6), and opt-in-only payload logging in the SDK (off by default, since full
+  payloads can contain PII).</li>
+</ul>
+<blockquote>
+<p>Known limitation (documented in code): the rate limiter's state is
+per-process/in-memory, so it is correct for a single instance but does not
+coordinate across multiple instances or survive a restart. Moving to a shared
+store (e.g. Redis sorted-set sliding window) is the stated path for a
+multi-instance deployment.</p>
+</blockquote>
+<hr />
+<h2 id="10-things-to-verify-before-relying-on-this-doc">10. Things to verify before relying on this doc<a class="headerlink" href="#10-things-to-verify-before-relying-on-this-doc" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Password hash algorithm</strong> — Better Auth default, not explicitly configured
+  here (§8). Confirm against the pinned library version if it matters.</li>
+<li><strong><code>events.id</code></strong> is intentionally not a primary key on the hypertable (§2);
+  don't assume uniqueness is DB-enforced.</li>
+<li><strong>Single-instance assumptions</strong> — the in-memory rate limiter (§9) and any other
+  in-process state assume one server instance.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.tracking", "navigation.top", "content.code.copy", "toc.follow"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="assets/javascripts/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1197 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="architecture.html">
+      
+      
+        <link rel="next" href="api-reference.html">
+      
+      
+        
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>SDK Reference - GameMetrics Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#gamemetrics-android-sdk" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="GameMetrics Documentation" class="md-header__button md-logo" aria-label="GameMetrics Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            GameMetrics Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              SDK Reference
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="GameMetrics Documentation" class="md-nav__button md-logo" aria-label="GameMetrics Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    GameMetrics Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="architecture.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SDK Reference
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="sdk.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SDK Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting started
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Getting started">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-include-the-module" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Include the module
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-add-your-api-key-and-project-id-as-meta-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Add your API key and project id as meta-data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-track-an-event" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Track an event
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#public-api-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Public API reference
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Public API reference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackevent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        trackEvent
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trackscreen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        trackScreen
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setuserid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        setUserId
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setuserproperty" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        setUserProperty
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logexception" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        logException
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flush" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        flush
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#init-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        init (optional)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#auto-initialization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Auto-initialization
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Auto-initialization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#opting-out" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Opting out
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#event-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Event lifecycle
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Event lifecycle">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#device-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Device context
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#internal-architecture-brief" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Internal architecture (brief)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-also" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        See also
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api-reference.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="design-decisions.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Decisions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting started
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Getting started">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-include-the-module" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Include the module
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-add-your-api-key-and-project-id-as-meta-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Add your API key and project id as meta-data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-track-an-event" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Track an event
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#public-api-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Public API reference
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Public API reference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackevent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        trackEvent
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trackscreen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        trackScreen
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setuserid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        setUserId
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setuserproperty" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        setUserProperty
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logexception" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        logException
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flush" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        flush
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#init-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        init (optional)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#auto-initialization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Auto-initialization
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Auto-initialization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#opting-out" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Opting out
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#event-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Event lifecycle
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Event lifecycle">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#device-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Device context
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#internal-architecture-brief" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Internal architecture (brief)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-also" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        See also
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="gamemetrics-android-sdk">GameMetrics — Android SDK<a class="headerlink" href="#gamemetrics-android-sdk" title="Permanent link">&para;</a></h1>
+<p>The GameMetrics Android SDK collects gameplay events on-device and uploads them
+in batches to a GameMetrics server, with zero initialization code required in the
+host app. This document is written against the Kotlin source in <code>/sdk</code>; every
+signature and example is taken from the code.</p>
+<p>Module coordinates: local Gradle module <code>:gamemetrics</code>, namespace
+<code>com.gamemetrics</code>, <code>minSdk 24</code>, <code>compileSdk 36</code>, Java 11.</p>
+<hr />
+<h2 id="getting-started">Getting started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h2>
+<p>The SDK is currently a <strong>local Gradle module</strong>, not yet published to a Maven
+repository. Integration is three steps: include the module, add your credentials
+as manifest meta-data, and call <code>trackEvent</code>.</p>
+<h3 id="1-include-the-module">1. Include the module<a class="headerlink" href="#1-include-the-module" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">// settings.gradle.kts</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">include</span><span class="p">(</span><span class="s">&quot;:gamemetrics&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1">// app/build.gradle.kts</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">dependencies</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="n">implementation</span><span class="p">(</span><span class="n">project</span><span class="p">(</span><span class="s">&quot;:gamemetrics&quot;</span><span class="p">))</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="p">}</span>
+</code></pre></div>
+<p>The library manifest already declares the <code>INTERNET</code> and <code>ACCESS_NETWORK_STATE</code>
+permissions and registers the auto-init <code>ContentProvider</code>, so nothing else needs
+to be added to your app manifest except your credentials.</p>
+<h3 id="2-add-your-api-key-and-project-id-as-meta-data">2. Add your API key and project id as meta-data<a class="headerlink" href="#2-add-your-api-key-and-project-id-as-meta-data" title="Permanent link">&para;</a></h3>
+<p>Get these by creating a project in the GameMetrics portal (see <code>/server</code>). Place
+the meta-data inside <code>&lt;application&gt;</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cm">&lt;!-- app/src/main/AndroidManifest.xml, inside &lt;application&gt; --&gt;</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nt">&lt;meta-data</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="na">android:name=</span><span class="s">&quot;com.gamemetrics.API_KEY&quot;</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="na">android:value=</span><span class="s">&quot;YOUR_API_KEY_HERE&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="nt">&lt;meta-data</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="na">android:name=</span><span class="s">&quot;com.gamemetrics.PROJECT_ID&quot;</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="na">android:value=</span><span class="s">&quot;your-project-id&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+</code></pre></div>
+<p>That is all the wiring the SDK needs — it auto-initializes at process start from
+these values (see <a href="#auto-initialization">Auto-initialization</a>). No <code>Application</code>
+subclass and no manual <code>init()</code> call are required.</p>
+<h3 id="3-track-an-event">3. Track an event<a class="headerlink" href="#3-track-an-event" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">com.gamemetrics.GameMetrics</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c1">// Anywhere in your game, once the process has started:</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">GameMetrics</span><span class="p">.</span><span class="na">trackEvent</span><span class="p">(</span><span class="s">&quot;level_complete&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">mapOf</span><span class="p">(</span><span class="s">&quot;level&quot;</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;score&quot;</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="m">9500</span><span class="p">))</span>
+</code></pre></div>
+<p>Events are <strong>not sent immediately</strong> — they are buffered locally and uploaded in
+batches by a background worker. See <a href="#event-lifecycle">Event lifecycle</a> for what
+happens next and when.</p>
+<blockquote>
+<p>Endpoint (dev default): the SDK ships pointing at
+<code>http://10.0.2.2:3000/v1/events/batch</code> — <code>10.0.2.2</code> is the Android emulator's
+alias for <code>localhost</code> on the host machine. The base URL is currently a
+compile-time constant (<code>HOST</code> in
+<code>internal/sink/HttpSink.kt</code>); there is no runtime override yet. Because the
+default is cleartext HTTP, the sample app allows it via a
+<code>networkSecurityConfig</code> — a production integration should target an HTTPS
+server.</p>
+</blockquote>
+<hr />
+<h2 id="public-api-reference">Public API reference<a class="headerlink" href="#public-api-reference" title="Permanent link">&para;</a></h2>
+<p>All public entry points are on the <code>GameMetrics</code> object
+(<code>sdk/gamemetrics/src/main/java/com/gamemetrics/GameMetrics.kt</code>). With auto-init,
+calling any tracking method before initialization throws <code>IllegalStateException</code>
+with a message explaining the missing meta-data; in practice auto-init has
+already run by the time your first Activity exists.</p>
+<h3 id="trackevent"><code>trackEvent</code><a class="headerlink" href="#trackevent" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">trackEvent</span><span class="p">(</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="n">params</span><span class="p">:</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="kt">Any</span><span class="o">&gt;?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span>
+</code></pre></div>
+<p>Record a custom event. <code>name</code> is the event name; <code>params</code> is an optional map of
+event-specific properties. The SDK automatically attaches the current
+<code>user_id</code>, the session id, the collected <a href="#device-context">device context</a>, and
+any <a href="#setuserproperty">user properties</a> before the event is stored.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">GameMetrics</span><span class="p">.</span><span class="na">trackEvent</span><span class="p">(</span><span class="s">&quot;purchase&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">mapOf</span><span class="p">(</span><span class="s">&quot;sku&quot;</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="s">&quot;gold_500&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;price&quot;</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="m">4.99</span><span class="p">))</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">GameMetrics</span><span class="p">.</span><span class="na">trackEvent</span><span class="p">(</span><span class="s">&quot;app_open&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// params is optional</span>
+</code></pre></div>
+<h3 id="trackscreen"><code>trackScreen</code><a class="headerlink" href="#trackscreen" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">trackScreen</span><span class="p">(</span><span class="n">screenName</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">)</span>
+</code></pre></div>
+<p>Convenience wrapper that records an event named <code>screen_view</code> with
+<code>params = { "screen_name": screenName }</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">GameMetrics</span><span class="p">.</span><span class="na">trackScreen</span><span class="p">(</span><span class="s">&quot;main_menu&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="setuserid"><code>setUserId</code><a class="headerlink" href="#setuserid" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">setUserId</span><span class="p">(</span><span class="n">userId</span><span class="p">:</span><span class="w"> </span><span class="kt">String?</span><span class="p">)</span>
+</code></pre></div>
+<p>Set (or clear, with <code>null</code>) the user identifier attached to <strong>subsequent</strong>
+events as <code>user_id</code>. It is not applied retroactively to already-tracked events.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">GameMetrics</span><span class="p">.</span><span class="na">setUserId</span><span class="p">(</span><span class="s">&quot;player_1&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="setuserproperty"><code>setUserProperty</code><a class="headerlink" href="#setuserproperty" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">setUserProperty</span><span class="p">(</span><span class="n">key</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">)</span>
+</code></pre></div>
+<p>Set a durable user property. The property is remembered for the rest of the
+process and merged into <strong>subsequent</strong> events under <code>params.user_properties</code>
+(alongside <code>context</code>), so it reaches the server with every event you track after
+setting it. Setting the same key again overwrites it; properties are not applied
+retroactively to already-tracked events.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">GameMetrics</span><span class="p">.</span><span class="na">setUserProperty</span><span class="p">(</span><span class="s">&quot;plan&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;premium&quot;</span><span class="p">)</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">GameMetrics</span><span class="p">.</span><span class="na">trackEvent</span><span class="p">(</span><span class="s">&quot;level_complete&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// params.user_properties = { &quot;plan&quot;: &quot;premium&quot; }</span>
+</code></pre></div>
+<h3 id="logexception"><code>logException</code><a class="headerlink" href="#logexception" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">logException</span><span class="p">(</span><span class="n">throwable</span><span class="p">:</span><span class="w"> </span><span class="n">Throwable</span><span class="p">)</span>
+</code></pre></div>
+<p>Record a handled exception as an event named <code>exception</code>, with
+<code>params = { "message": &lt;message&gt;, "stacktrace": &lt;full stack trace&gt; }</code>. This is
+the same event the crash handler emits for uncaught exceptions.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">    </span><span class="n">riskyOperation</span><span class="p">()</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="p">:</span><span class="w"> </span><span class="n">Exception</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">    </span><span class="n">GameMetrics</span><span class="p">.</span><span class="na">logException</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="flush"><code>flush</code><a class="headerlink" href="#flush" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">flush</span><span class="p">()</span>
+</code></pre></div>
+<p>Request an immediate upload of buffered events by enqueueing a one-time
+<code>FlushWorker</code>. It is asynchronous — it schedules the work and returns; it does
+not block or guarantee delivery by the time it returns (that still depends on
+network availability). Normal operation does not require calling this; the SDK
+flushes on its own (see <a href="#event-lifecycle">Event lifecycle</a>).</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">GameMetrics</span><span class="p">.</span><span class="na">flush</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="init-optional"><code>init</code> (optional)<a class="headerlink" href="#init-optional" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">init</span><span class="p">(</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">    </span><span class="n">context</span><span class="p">:</span><span class="w"> </span><span class="n">Context</span><span class="p">,</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">    </span><span class="n">apiKey</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">    </span><span class="n">projectId</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="w">    </span><span class="n">loggingOnly</span><span class="p">:</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="w">    </span><span class="n">debugLogPayloads</span><span class="p">:</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="p">)</span>
+</code></pre></div>
+<p>Manual initialization. Only needed if you disable auto-init (see below) or want
+to supply credentials at runtime instead of via meta-data. <code>loggingOnly</code> routes
+events to a logging sink instead of the network (useful in tests/dev);
+<code>debugLogPayloads</code> logs full request bodies (off by default because payloads can
+contain PII).</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">GameMetrics</span><span class="p">.</span><span class="na">init</span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">apiKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;…&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">projectId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;…&quot;</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h2 id="auto-initialization">Auto-initialization<a class="headerlink" href="#auto-initialization" title="Permanent link">&para;</a></h2>
+<p>The SDK initializes itself before your code runs, which is what makes the
+zero-init-code integration possible. It ships a <code>ContentProvider</code>
+(<code>GameMetricsInitProvider</code>) declared in the library manifest with authority
+<code>${applicationId}.gamemetricsinitprovider</code>. Android instantiates and calls
+<code>onCreate()</code> on all installed content providers <strong>after the <code>Application</code> object
+is constructed but before <code>Application.onCreate()</code> runs</strong> — so the provider is a
+reliable, app-code-free hook to initialize at process start.</p>
+<p>In <code>onCreate()</code> the provider reads the app's meta-data and, unless auto-init is
+disabled, calls <code>GameMetrics.init(...)</code> with your <code>API_KEY</code> and <code>PROJECT_ID</code>. If
+either value is missing or blank it logs a warning and skips init (it does not
+crash the app).</p>
+<pre class="mermaid"><code>flowchart TD
+  start["App process starts"] --&gt; appctor["Application instantiated&lt;br/&gt;(constructor + attachBaseContext)"]
+  appctor --&gt; provider["GameMetricsInitProvider.onCreate()&lt;br/&gt;reads API_KEY / PROJECT_ID meta-data&lt;br/&gt;→ GameMetrics.init(...)"]
+  provider --&gt; apponcreate["Application.onCreate()"]
+  apponcreate --&gt; activity["First Activity&lt;br/&gt;(SDK already initialized)"]</code></pre>
+<h3 id="opting-out">Opting out<a class="headerlink" href="#opting-out" title="Permanent link">&para;</a></h3>
+<p>To take over initialization yourself, disable auto-init with a boolean meta-data
+flag and call <code>GameMetrics.init(...)</code> manually:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="nt">&lt;meta-data</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w">    </span><span class="na">android:name=</span><span class="s">&quot;com.gamemetrics.AUTO_INIT&quot;</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="w">    </span><span class="na">android:value=</span><span class="s">&quot;false&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+</code></pre></div>
+<p>Other recognized meta-data flags (both default to <code>false</code>):
+<code>com.gamemetrics.LOGGING_ONLY</code> and <code>com.gamemetrics.DEBUG_LOG_PAYLOADS</code>.</p>
+<hr />
+<h2 id="event-lifecycle">Event lifecycle<a class="headerlink" href="#event-lifecycle" title="Permanent link">&para;</a></h2>
+<p>From your code's point of view a single call to <code>trackEvent</code> kicks off this path.
+It is intentionally asynchronous and buffered.</p>
+<pre class="mermaid"><code>sequenceDiagram
+    participant App as Game code
+    participant GM as GameMetrics (facade)
+    participant Client as GameMetricsClient
+    participant Room as Room buffer (SQLite)
+    participant Worker as FlushWorker
+    participant Server as Server /v1/events/batch
+
+    App-&gt;&gt;GM: trackEvent("level_complete", params)
+    GM-&gt;&gt;Client: trackEvent(...)
+    Client-&gt;&gt;Client: build event&lt;br/&gt;(+ user_id, session_id, device context, user properties)
+    Client-&gt;&gt;Room: insert event (async, off the caller thread)
+    Note over Room: event persisted locally —&lt;br/&gt;survives offline periods and process death
+
+    Note over Worker: triggered periodically (~15 min),&lt;br/&gt;on app background, or via flush()
+    Worker-&gt;&gt;Room: getOldest(≤500 events)
+    Worker-&gt;&gt;Server: POST batch (x-api-key, one request)
+    Server--&gt;&gt;Worker: 201 delivered
+    Worker-&gt;&gt;Room: delete the sent rows</code></pre>
+<p><strong>Buffering.</strong> <code>trackEvent</code> never blocks the calling thread and never performs
+network I/O inline. The event is enqueued and written to a local Room/SQLite
+database (<code>gamemetrics-events</code>) on a background coroutine. Events tracked before
+the database finishes opening are held in an in-memory queue and drained into the
+database as soon as it is ready.</p>
+<p><strong>Batching.</strong> Uploads are done by <code>FlushWorker</code> (a WorkManager
+<code>CoroutineWorker</code>). It drains the queue oldest-first, up to <strong>500 events per
+request</strong> (the server's per-batch cap), and sends each batch as a single
+<code>POST /v1/events/batch</code>. On a <code>2xx</code> the rows are deleted; the loop repeats until
+the queue is empty.</p>
+<p><strong>Flush timing.</strong> A flush happens:
+- <strong>Periodically</strong> — a unique periodic worker runs roughly every 15 minutes
+  (WorkManager decides exact timing; it requires network connectivity).
+- <strong>On backgrounding</strong> — when the app goes to the background
+  (<code>ProcessLifecycleOwner</code> <code>onStop</code>), a flush is enqueued immediately.
+- <strong>On demand</strong> — when you call <code>GameMetrics.flush()</code>.</p>
+<p>Because of this, <strong>events are not instant</strong>: expect up to the periodic interval
+of delay in the worst case (sooner if the app is backgrounded or you flush
+manually). Design your analytics expectations around eventual, batched delivery.</p>
+<p><strong>Offline persistence.</strong> Events live in the on-device database until a batch is
+confirmed stored, so they survive no-network periods, app restarts, and process
+death. On a transient failure (network error or <code>5xx</code>), or a <code>429</code>, the rows are
+kept and retried later (respecting a <code>Retry-After</code> hint on <code>429</code>); WorkManager
+handles backoff. A batch the server rejects as a client error (<code>400</code>/<code>413</code>) is
+logged and dropped so it can't wedge the queue forever.</p>
+<p><strong>Device context.</strong> At init the SDK collects a device/app context object <strong>once</strong>
+and merges it into every event's <code>params</code> under a nested <code>context</code> key — the
+developer passes none of it. See <a href="#device-context">below</a> for the shape.</p>
+<p><strong>User properties.</strong> Any values set via <code>setUserProperty</code> are snapshotted at
+track time and merged into the event's <code>params</code> under a <code>user_properties</code> key, so
+they travel to the server with every subsequent event (see
+<a href="#setuserproperty"><code>setUserProperty</code></a>).</p>
+<p><strong>Crash-safe upload.</strong> The SDK installs an uncaught-exception handler. On an
+uncaught exception it records an <code>exception</code> event and <strong>synchronously</strong> flushes
+pending events before the process dies (WorkManager's deferred flush would never
+run once the process is being killed). This blocking flush is hard-capped at
+<strong>3 seconds</strong> of wall-clock time (with short per-connection timeouts) so it can
+never hang the dying process, then it chains to the previously installed handler
+so the normal system crash dialog / other reporters still run. Anything it
+couldn't send in the budget stays in the database and uploads on the next launch.</p>
+<h3 id="device-context">Device context<a class="headerlink" href="#device-context" title="Permanent link">&para;</a></h3>
+<p>Collected once at init and attached to every event under <code>params.context</code>
+(verified shape, from <code>internal/context/DeviceContext.kt</code>):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nt">&quot;context&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">  </span><span class="nt">&quot;device&quot;</span><span class="p">:</span><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;model&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Pixel 7&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;manufacturer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Google&quot;</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">  </span><span class="nt">&quot;os&quot;</span><span class="p">:</span><span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;release&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;14&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;sdk_int&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">34</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="w">  </span><span class="nt">&quot;app&quot;</span><span class="p">:</span><span class="w">     </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;version_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;version_code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="w">  </span><span class="nt">&quot;screen&quot;</span><span class="p">:</span><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;width&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1080</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;height&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2400</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;density&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">2.75</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="w">  </span><span class="nt">&quot;locale&quot;</span><span class="p">:</span><span class="w">  </span><span class="s2">&quot;en-US&quot;</span><span class="p">,</span>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="w">  </span><span class="nt">&quot;network&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wifi&quot;</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="s2">&quot;cellular&quot;</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="s2">&quot;none&quot;</span>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="p">}</span>
+</code></pre></div>
+<p><code>network</code> reflects connectivity <strong>at init time only</strong>, since the context is
+captured once. Context collection is best-effort — if it fails it is logged and
+tracking continues.</p>
+<hr />
+<h2 id="internal-architecture-brief">Internal architecture (brief)<a class="headerlink" href="#internal-architecture-brief" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Facade / client split.</strong> <code>GameMetrics</code> (public object) is a thin facade that
+  delegates to a single internal <code>GameMetricsClient</code>, which owns session id,
+  current user id, the event buffer, WorkManager scheduling, and the crash
+  handler.</li>
+<li><strong>Room.</strong> Events are persisted in a Room database (<code>EventEntity</code> /
+  <code>EventDao</code>), queried oldest-first and deleted by id after a confirmed send.</li>
+<li><strong>WorkManager.</strong> <code>FlushWorker</code> performs the batched uploads (periodic +
+  expedited one-time for immediate/backgrounded/retry flushes).</li>
+<li><strong>Sinks.</strong> An <code>EventSink</code> abstracts delivery: <code>HttpSink</code> posts a batch to
+  <code>/v1/events/batch</code> and maps the response to <code>Delivered</code> / <code>Rejected</code> /
+  <code>Retry</code>; <code>LoggingSink</code> is the <code>loggingOnly</code> no-network alternative.</li>
+</ul>
+<p>The server-side ingestion contract these cooperate with — the single-round-trip
+<code>unnest</code> insert and whole-batch-atomic <code>201</code>/<code>400</code> semantics — is documented in
+<a href="architecture.html#5-ingestion-path">architecture.md §5</a>.</p>
+<hr />
+<h2 id="see-also">See also<a class="headerlink" href="#see-also" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="architecture.html">architecture.md</a> — full system architecture; <strong>§1</strong> (SDK
+  tier / data flow), <strong>§5</strong> (ingestion path and SDK ↔ server contract).</li>
+<li><a href="api-reference.html">api-reference.md</a> — the REST API the SDK posts to
+  (<code>/v1/events/batch</code>).</li>
+<li><code>/sdk/app</code> — a runnable sample app exercising every public method (including a
+  forced-crash button that demonstrates the crash-safe upload path).</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.tracking", "navigation.top", "content.code.copy", "toc.follow"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="assets/javascripts/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>

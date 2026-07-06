@@ -1,0 +1,908 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="api-reference.html">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Design Decisions - GameMetrics Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#gamemetrics-design-decisions" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="GameMetrics Documentation" class="md-header__button md-logo" aria-label="GameMetrics Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            GameMetrics Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Design Decisions
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="GameMetrics Documentation" class="md-nav__button md-logo" aria-label="GameMetrics Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    GameMetrics Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="architecture.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="sdk.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SDK Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api-reference.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Decisions
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="design-decisions.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Decisions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#build-the-backend-instead-of-using-a-baas-firebase-supabase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build the backend instead of using a BaaS (Firebase / Supabase)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#timescaledb-with-a-hypertable-and-a-continuous-aggregate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TimescaleDB with a hypertable and a continuous aggregate
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contentprovider-auto-initialization-vs-requiring-init" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ContentProvider auto-initialization (vs. requiring init())
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#instance-core-behind-a-static-facade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Instance core behind a static facade
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#local-buffer-batched-background-flush-room-workmanager" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Local buffer + batched background flush (Room + WorkManager)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whole-batch-atomic-ingestion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Whole-batch-atomic ingestion
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#two-separate-authentication-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Two separate authentication systems
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-vetted-auth-library-better-auth-instead-of-hand-rolling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A vetted auth library (Better Auth) instead of hand-rolling
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authorization-in-the-data-layer-not-middleware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authorization in the data layer, not middleware
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-also" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        See also
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#build-the-backend-instead-of-using-a-baas-firebase-supabase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build the backend instead of using a BaaS (Firebase / Supabase)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#timescaledb-with-a-hypertable-and-a-continuous-aggregate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TimescaleDB with a hypertable and a continuous aggregate
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contentprovider-auto-initialization-vs-requiring-init" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ContentProvider auto-initialization (vs. requiring init())
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#instance-core-behind-a-static-facade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Instance core behind a static facade
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#local-buffer-batched-background-flush-room-workmanager" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Local buffer + batched background flush (Room + WorkManager)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whole-batch-atomic-ingestion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Whole-batch-atomic ingestion
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#two-separate-authentication-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Two separate authentication systems
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-vetted-auth-library-better-auth-instead-of-hand-rolling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A vetted auth library (Better Auth) instead of hand-rolling
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authorization-in-the-data-layer-not-middleware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authorization in the data layer, not middleware
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-also" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        See also
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="gamemetrics-design-decisions">GameMetrics — Design Decisions<a class="headerlink" href="#gamemetrics-design-decisions" title="Permanent link">&para;</a></h1>
+<p>This document records the key design decisions behind GameMetrics and the
+reasoning for each: the choice made, the problem it solves, the main alternative
+considered, and why this option won. It is the "why we chose this" companion to
+<a href="architecture.html">architecture.md</a> (which covers <em>how</em> the system works) — so
+where a decision has mechanics, this doc links there rather than repeating them.</p>
+<p>A framing note that runs through several of these: this is a project whose point
+is to <strong>design and justify an analytics pipeline</strong>, so decisions deliberately
+favor understanding and control of the storage/retrieval/ingestion path over
+shipping-fastest. Where that tradeoff is real, it is called out honestly.</p>
+<hr />
+<h2 id="build-the-backend-instead-of-using-a-baas-firebase-supabase">Build the backend instead of using a BaaS (Firebase / Supabase)<a class="headerlink" href="#build-the-backend-instead-of-using-a-baas-firebase-supabase" title="Permanent link">&para;</a></h2>
+<p><strong>Choice.</strong> Implement the ingestion API, storage schema, and metrics API
+ourselves on Postgres/TimescaleDB, rather than adopting a Backend-as-a-Service
+(Firebase Analytics, Supabase, Amplitude, etc.).</p>
+<p><strong>Problem.</strong> A game needs somewhere to send events and something that turns them
+into charts. A BaaS solves exactly that, often in an afternoon.</p>
+<p><strong>Alternative.</strong> Use Firebase Analytics or Supabase: managed ingestion, managed
+storage, managed dashboards, autoscaling, no ops.</p>
+<p><strong>Why build.</strong> The entire subject of this project <em>is</em> the pipeline — how events
+are stored, why they're partitioned that way, when to read a pre-aggregate versus
+raw rows, how ingestion stays cheap and atomic. A BaaS is valuable precisely
+because it <strong>hides</strong> those decisions; adopting one would hide the thing being
+designed and justified. Building it also buys real properties that matter beyond
+the exercise: <strong>data ownership</strong> (events live in a database we control, not a
+third party's), <strong>portability</strong> (plain Postgres + SQL, no proprietary lock-in),
+and <strong>control</strong> over the efficiency choices (chunking, continuous aggregates,
+batch ingestion) that a managed product would make for us.</p>
+<p><strong>Honest tradeoff.</strong> For a team whose goal is to <em>ship a game</em>, a BaaS is the
+right call — it is faster, operationally free, and battle-tested. Self-hosting
+means we own scaling, backups, and uptime. This project accepts that cost on
+purpose because the learning and control are the deliverable; it is not a claim
+that everyone should hand-roll analytics.</p>
+<hr />
+<h2 id="timescaledb-with-a-hypertable-and-a-continuous-aggregate">TimescaleDB with a hypertable and a continuous aggregate<a class="headerlink" href="#timescaledb-with-a-hypertable-and-a-continuous-aggregate" title="Permanent link">&para;</a></h2>
+<p><strong>Choice.</strong> Store events in a TimescaleDB <strong>hypertable</strong> partitioned on time, and
+maintain a <strong>continuous aggregate</strong> (<code>event_counts_hourly</code>) for chart/count reads.</p>
+<p><strong>Problem.</strong> The workload is append-heavy and time-ordered on write, and almost
+always "aggregate over a time window for one project" on read. A plain table
+makes every windowed read scan history, and recomputes counts that never change.</p>
+<p><strong>Alternative.</strong> A vanilla Postgres table with indexes; or a separate OLAP store
+(ClickHouse, BigQuery); or rolling our own summary tables with cron jobs.</p>
+<p><strong>Why this won.</strong> The hypertable keeps it <em>plain Postgres</em> (same <code>pg</code> driver,
+same SQL, no second datastore to operate) while adding exactly the time-series
+primitives this workload needs: time-partitioned chunks give <strong>chunk exclusion</strong>
+so a range query touches only the overlapping chunks, and the continuous
+aggregate <strong>pre-rolls</strong> hourly counts so a chart reads a handful of rows instead
+of scanning thousands — with real-time aggregation keeping it fresh. A dedicated
+OLAP store would be more power than a single-tenant-per-key dashboard needs and
+another system to run; hand-rolled summary tables would reinvent, less correctly,
+what continuous aggregates already do.</p>
+<p>See <a href="architecture.html#3-storage-strategy-and-why">architecture.md §3</a> for the
+mechanics and <a href="architecture.html#4-retrieval-strategy-and-why">§4</a> for the
+aggregate-vs-raw read decision.</p>
+<hr />
+<h2 id="contentprovider-auto-initialization-vs-requiring-init">ContentProvider auto-initialization (vs. requiring <code>init()</code>)<a class="headerlink" href="#contentprovider-auto-initialization-vs-requiring-init" title="Permanent link">&para;</a></h2>
+<p><strong>Choice.</strong> The SDK initializes itself at process start via a manifest-declared
+<code>ContentProvider</code>, reading credentials from <code>&lt;meta-data&gt;</code> — no app code required.
+A manual <code>GameMetrics.init(...)</code> and an <code>AUTO_INIT=false</code> opt-out remain.</p>
+<p><strong>Problem.</strong> Every required integration step is a step a developer can get wrong
+or forget. Requiring an <code>Application</code> subclass and an <code>init()</code> call in
+<code>onCreate()</code> is friction, and misordering it (tracking before init) is a common
+bug.</p>
+<p><strong>Alternative.</strong> Require the host app to call <code>GameMetrics.init(context, key,
+projectId)</code> in a custom <code>Application.onCreate()</code>.</p>
+<p><strong>Why this won.</strong> Android runs every installed <code>ContentProvider</code>'s <code>onCreate()</code>
+after the <code>Application</code> is constructed but <strong>before</strong> <code>Application.onCreate()</code>, so
+a provider is a reliable, app-code-free hook that guarantees the SDK is ready
+before the first Activity exists. That turns integration into "add two meta-data
+lines" with zero initialization code and no ordering hazard. This is the same
+mechanism Firebase used (<code>FirebaseInitProvider</code>); the <strong>modern equivalent is
+AndroidX App Startup</strong>, which formalizes the pattern and lets multiple libraries
+share a single provider. We keep manual <code>init()</code> for the cases auto-init can't
+serve (runtime credentials, or opting out).</p>
+<p>See <a href="sdk.html#auto-initialization">sdk.md § Auto-initialization</a>.</p>
+<p><strong>Tradeoff.</strong> A hidden provider is slightly less obvious than an explicit call,
+and it costs a small fixed amount of startup work; the <code>AUTO_INIT=false</code> flag
+exists so an app that wants full control can take it.</p>
+<hr />
+<h2 id="instance-core-behind-a-static-facade">Instance core behind a static facade<a class="headerlink" href="#instance-core-behind-a-static-facade" title="Permanent link">&para;</a></h2>
+<p><strong>Choice.</strong> Public API is a static <code>object GameMetrics</code> (<code>trackEvent</code>,
+<code>setUserId</code>, …) that delegates to a single internal instance,
+<code>GameMetricsClient</code>, which holds all state (session id, user id, buffer,
+scheduling, crash handler).</p>
+<p><strong>Problem.</strong> Two competing goals. Callers want the ergonomics of
+<code>GameMetrics.trackEvent(...)</code> from anywhere, with no object to thread through the
+app. Maintainers want the state and behavior to live in something testable and
+not tangled into global statics.</p>
+<p><strong>Alternative.</strong> Put everything in the static object (simplest for the caller,
+but global mutable state that's hard to test and reset), or expose an instance
+the caller must construct and pass around (testable, but pushes lifecycle
+management onto every integrator).</p>
+<p><strong>Why this won.</strong> The split gets both: the facade is a thin, zero-state shim that
+delegates — the <em>call site</em> stays effortless — while all real logic sits in a
+plain class that can be constructed, exercised, and reasoned about in isolation.
+The facade also becomes the single place to enforce "initialized before use"
+(a clear <code>IllegalStateException</code> if not). It's the standard SDK shape for exactly
+this reason.</p>
+<hr />
+<h2 id="local-buffer-batched-background-flush-room-workmanager">Local buffer + batched background flush (Room + WorkManager)<a class="headerlink" href="#local-buffer-batched-background-flush-room-workmanager" title="Permanent link">&para;</a></h2>
+<p><strong>Choice.</strong> <code>trackEvent</code> writes to a local Room/SQLite buffer and returns
+immediately; a WorkManager job uploads events in batches later.</p>
+<p><strong>Problem.</strong> A game's frame loop must never block on analytics, networks drop,
+and processes die — yet events shouldn't be lost or sent one-HTTP-call-each.</p>
+<p><strong>Alternative.</strong> Send each event over HTTP inline (or from an in-memory queue
+with no persistence).</p>
+<p><strong>Why this won.</strong> Persisting first, then flushing, is what buys the three
+properties that matter:</p>
+<ul>
+<li><strong>Never block the game.</strong> <code>trackEvent</code> does a local enqueue off the caller
+  thread and returns; no network I/O on the hot path.</li>
+<li><strong>Offline resilience / durability.</strong> Events live in SQLite until a batch is
+  <em>confirmed</em> stored, so they survive no-network periods, restarts, and process
+  death. An in-memory-only queue loses everything on the next crash.</li>
+<li><strong>Efficiency.</strong> WorkManager coalesces events and uploads up to 500 per request
+  (with network constraints and backoff), instead of one connection per event.</li>
+<li><strong>Crash-safe upload.</strong> Because events are already persisted, the uncaught-
+  exception handler can synchronously flush what's pending within a hard time
+  budget before the process dies, and anything unsent is still on disk for next
+  launch.</li>
+</ul>
+<p>The cost is that <strong>events are eventually-delivered, not instant</strong> — an explicit,
+documented property, mitigated by flush-on-background and an on-demand <code>flush()</code>.</p>
+<p>See <a href="sdk.html#event-lifecycle">sdk.md § Event lifecycle</a>.</p>
+<hr />
+<h2 id="whole-batch-atomic-ingestion">Whole-batch-atomic ingestion<a class="headerlink" href="#whole-batch-atomic-ingestion" title="Permanent link">&para;</a></h2>
+<p><strong>Choice.</strong> <code>POST /v1/events/batch</code> validates every event first; if any is
+malformed it rejects the <strong>entire</strong> batch with <code>400</code> and writes nothing. A <code>201</code>
+means every event was stored.</p>
+<p><strong>Problem.</strong> With a partial-success model ("store the valid ones, skip the bad
+ones") the client can't know <em>which</em> events were kept, so it can't safely clear
+its send buffer without a reconciliation protocol.</p>
+<p><strong>Alternative.</strong> Accept-valid / skip-invalid, returning per-item results.</p>
+<p><strong>Why this won.</strong> All-or-nothing gives the SDK a clean contract: <strong>on <code>201</code>, drop
+exactly the batch you sent; on <code>400</code>, it's a client bug — log and drop; on
+<code>5xx</code>/<code>429</code>, keep and retry.</strong> No partial-state bookkeeping on the device.
+Because the write is a single multi-row <code>INSERT</code>, atomicity also falls out for
+free at the database level, and malformed input is a client defect worth
+surfacing loudly rather than silently dropping. The tradeoff — one bad event
+fails its whole batch — is acceptable because the SDK only ever assembles batches
+from data it validated on the way in, so a rejection signals a real bug, not
+routine noise.</p>
+<p>See <a href="architecture.html#5-ingestion-path">architecture.md §5</a>.</p>
+<hr />
+<h2 id="two-separate-authentication-systems">Two separate authentication systems<a class="headerlink" href="#two-separate-authentication-systems" title="Permanent link">&para;</a></h2>
+<p><strong>Choice.</strong> Machine traffic (SDKs/integrators hitting <code>/v1/*</code>) authenticates with
+a per-project <strong><code>x-api-key</code></strong>; humans (the dashboard) authenticate with an
+email/password <strong>session cookie</strong>. They share no code path.</p>
+<p><strong>Problem.</strong> The two callers have genuinely different threat models. An API key is
+a long-lived secret embedded in a shipped game binary, scoped to one project's
+data. A portal login is an interactive human credential that should be
+short-lived, revocable, and tied to a user and the projects they own.</p>
+<p><strong>Alternative.</strong> One unified auth system serving both (e.g. issue the game a user
+session too, or gate the dashboard with API keys).</p>
+<p><strong>Why this won.</strong> Conflating them would force one mechanism to satisfy two
+incompatible sets of requirements — a bearer secret suitable for a client binary
+is a poor fit for a revocable human session and vice versa. Keeping them separate
+means each is as simple and as strict as its own model demands, the machine path
+never depends on human session handling, and the ingestion routes are completely
+untouched by portal auth (the middleware matcher deliberately excludes <code>/v1/*</code>).</p>
+<p>See <a href="architecture.html#8-two-separate-auth-systems">architecture.md §8</a>.</p>
+<hr />
+<h2 id="a-vetted-auth-library-better-auth-instead-of-hand-rolling">A vetted auth library (Better Auth) instead of hand-rolling<a class="headerlink" href="#a-vetted-auth-library-better-auth-instead-of-hand-rolling" title="Permanent link">&para;</a></h2>
+<p><strong>Choice.</strong> Use Better Auth for the portal's password hashing, sessions, and
+cookies rather than implementing them.</p>
+<p><strong>Problem.</strong> The dashboard needs email/password login with correctly hashed
+passwords, secure session tokens, and safe cookie handling.</p>
+<p><strong>Alternative.</strong> Hand-roll it: pick a hashing algorithm, manage salts, mint and
+store session tokens, set cookie flags.</p>
+<p><strong>Why this won.</strong> This is the deliberate asymmetry in what this project builds
+versus buys. The <strong>pipeline</strong> — storage, retrieval, ingestion — is the subject
+worth building and understanding. <strong>Authentication is a security-critical solved
+problem</strong> where a subtle mistake (a weak hash, a token-comparison flaw, a missing
+cookie flag) is a real vulnerability, and where a well-maintained library encodes
+years of hard-won correctness. So we build the thing we're studying and buy the
+security-critical commodity: the library owns password hashing (we never write
+<code>user</code>/<code>account</code> rows by hand — even the demo seed goes through
+<code>auth.api.signUpEmail</code>), and sessions are DB-backed and revocable.</p>
+<p><strong>Note.</strong> The exact hashing algorithm is Better Auth's built-in default (not
+overridden here) — see the flag in
+<a href="architecture.html#8-two-separate-auth-systems">architecture.md §8</a>.</p>
+<hr />
+<h2 id="authorization-in-the-data-layer-not-middleware">Authorization in the data layer, not middleware<a class="headerlink" href="#authorization-in-the-data-layer-not-middleware" title="Permanent link">&para;</a></h2>
+<p><strong>Choice.</strong> Every protected portal page and route enforces auth <strong>in the data
+layer</strong> (<code>requireUser()</code> / <code>getOwnedProject()</code> in the server components and route
+handlers). Middleware is treated as an optimistic redirect only, explicitly <em>not</em>
+the security boundary.</p>
+<p><strong>Problem.</strong> It's tempting to gate access once, in Next.js middleware, and treat
+everything behind it as protected.</p>
+<p><strong>Alternative.</strong> Rely on middleware as the authorization boundary.</p>
+<p><strong>Why this won.</strong> <strong>CVE-2025-29927</strong> demonstrated that Next.js middleware auth
+gates can be bypassed — so anything relying on middleware alone is exposed. Moving
+the real check next to the data access makes bypassing the outer layer harmless:
+each page/route independently verifies the session and that the logged-in user
+<strong>owns</strong> the requested project (returning the same <code>404</code> for "missing" and "not
+yours" so existence isn't leaked across accounts). Middleware stays only as a UX
+nicety (bounce cookie-less users to <code>/login</code> and save a render). Defense that
+lives where the data is read can't be skipped by skipping a layer above it.</p>
+<p>See <a href="architecture.html#9-security">architecture.md §9</a>.</p>
+<hr />
+<h2 id="see-also">See also<a class="headerlink" href="#see-also" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="architecture.html">architecture.md</a> — how the system works (storage §3,
+  retrieval §4, ingestion §5, auth §8, security §9).</li>
+<li><a href="sdk.html">sdk.md</a> — SDK integration, auto-init, and event lifecycle.</li>
+<li><a href="api-reference.html">api-reference.md</a> — the REST API these decisions shape.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.tracking", "navigation.top", "content.code.copy", "toc.follow"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="assets/javascripts/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>
