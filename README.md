@@ -15,6 +15,13 @@ that visualizes them. It's general-purpose — any Android game integrates by
 adding the SDK and an API key — and multi-tenant: each project has its own API
 key, and portal users only see the projects they own.
 
+## Demo
+
+A short clip of the SDK in action — an event tracked on-device flows through to
+the live dashboard:
+
+<!-- VIDEO: drag the .mp4 here in the GitHub web editor; it embeds as a player -->
+
 ## Architecture
 
 Three tiers, one direction of data flow:
@@ -41,7 +48,7 @@ Three tiers, one direction of data flow:
   Browser ──(session cookie)──►  Portal (dashboard)  ◄──(/v1/metrics/*)
 ```
 
-<!-- ARCHITECTURE DIAGRAM HERE -->
+See the full [architecture diagram](./docs/architecture.md) in the docs.
 
 ## Key features
 
