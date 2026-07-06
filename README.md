@@ -188,7 +188,7 @@ A runnable sample app lives in `sdk/app`.
 
 ## Documentation
 
-Deeper docs live in [`/docs`](./docs) *(being written)*:
+Deeper docs live in [`/docs`](./docs):
 
 - [`architecture.md`](./docs/architecture.md) — the three tiers, data flow, and storage model in detail
 - [`sdk.md`](./docs/sdk.md) — SDK integration guide, full API, event/context schema, and lifecycle
@@ -215,10 +215,12 @@ mkdocs serve   # live-reloading local preview at http://127.0.0.1:8000
 mkdocs build   # generate the static site into ./site
 ```
 
-`mkdocs build` writes a self-contained `site/` folder. Open `site/index.html`
-directly in a browser — `use_directory_urls: false` keeps links working over
-`file://`. (Rendering the Mermaid diagrams fetches `mermaid.js` from a CDN, so
-that page needs internet access the first time.)
+`mkdocs build` writes a fully self-contained `site/` folder. Open
+`site/index.html` directly in a browser — `use_directory_urls: false` keeps
+links working over `file://`. Everything, including `mermaid.js` (vendored under
+`docs/assets/javascripts/`) and the fonts, is bundled locally, so the site —
+Mermaid diagrams included — renders completely offline with no CDN or network
+access.
 
 ## License
 

@@ -8,6 +8,9 @@ use_directory_urls: false
 
 theme:
   name: material
+  # Use system fonts instead of fetching Roboto from fonts.googleapis.com, so
+  # the site is fully self-contained and works offline from file://.
+  font: false
   palette:
     scheme: slate
     primary: indigo
